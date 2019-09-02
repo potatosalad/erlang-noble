@@ -1,0 +1,14 @@
+{"1.1.0",
+[{<<"conv_case">>,{pkg,<<"conv_case">>,<<"0.2.2">>},1},
+ {<<"decimal">>,{pkg,<<"decimal">>,<<"1.8.0">>},1},
+ {<<"jason">>,{pkg,<<"jason">>,<<"1.1.2">>},0},
+ {<<"json_xema">>,{pkg,<<"json_xema">>,<<"0.3.3">>},0},
+ {<<"xema">>,{pkg,<<"xema">>,<<"0.9.3">>},1}]}.
+[
+{pkg_hash,[
+ {<<"conv_case">>, <<"5A98B74AB8F7DDBAD670E5C7BB39FF280E60699AA3B25C7062CECCF48137433C">>},
+ {<<"decimal">>, <<"CA462E0D885F09A1C5A342DBD7C1DCF27EA63548C65A65E67334F4B61803822E">>},
+ {<<"jason">>, <<"B03DEDEA67A99223A2EAF9F1264CE37154564DE899FD3D8B9A21B1A6FD64AFE7">>},
+ {<<"json_xema">>, <<"3ED7CC3DF78913A9A952C9A15A7F44A4309F25FCC1EE1782531228F6CBED7943">>},
+ {<<"xema">>, <<"68261F2E04E852B3B5CA32E938F3007811C693E55AD5E17F9591F2BA410620D2">>}]}
+].

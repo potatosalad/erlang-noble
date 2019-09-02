@@ -1,0 +1,7 @@
+%{
+  "conv_case": {:hex, :conv_case, "0.2.2", "5a98b74ab8f7ddbad670e5c7bb39ff280e60699aa3b25c7062ceccf48137433c", [:mix], [], "hexpm"},
+  "elixir_make": {:hex, :elixir_make, "0.6.0", "38349f3e29aff4864352084fc736fa7fa0f2995a819a737554f7ebd28b85aaab", [:mix], [], "hexpm"},
+  "jason": {:hex, :jason, "1.1.2", "b03dedea67a99223a2eaf9f1264ce37154564de899fd3d8b9a21b1a6fd64afe7", [:mix], [{:decimal, "~> 1.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm"},
+  "json_xema": {:hex, :json_xema, "0.3.3", "3ed7cc3df78913a9a952c9a15a7f44a4309f25fcc1ee1782531228f6cbed7943", [:mix], [{:conv_case, "~> 0.2", [hex: :conv_case, repo: "hexpm", optional: false]}, {:xema, "~> 0.9", [hex: :xema, repo: "hexpm", optional: false]}], "hexpm"},
+  "xema": {:hex, :xema, "0.9.3", "68261f2e04e852b3b5ca32e938f3007811c693e55ad5e17f9591f2ba410620d2", [:mix], [{:decimal, "~> 1.7", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm"},
+}
