@@ -4,7 +4,7 @@ defmodule Noble.MixProject do
   def project() do
     [
       app: :noble,
-      version: "0.0.1",
+      version: "0.0.2",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -16,7 +16,7 @@ defmodule Noble.MixProject do
       source_url: "https://github.com/potatosalad/erlang-noble",
       docs: fn ->
         {ref, 0} = System.cmd("git", ["rev-parse", "--verify", "--quiet", "HEAD"])
-        [source_ref: ref, main: "Noble", extras: ["README.md", "CHANGELOG.md"]]
+        [source_ref: ref, main: "readme", extras: ["README.md", "CHANGELOG.md"]]
       end,
       description: description(),
       package: package()
@@ -36,6 +36,7 @@ defmodule Noble.MixProject do
   defp deps() do
     [
       {:elixir_make, "~> 0.6", runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev},
       {:jason, "~> 1.1"},
       {:json_xema, "~> 0.3.3"}
     ]

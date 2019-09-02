@@ -298,15 +298,29 @@ handle_event(info, {Port, {data, PortData}}, State = open, Data0=#data{buffer=So
 			{Actions, Data1} = maybe_ping(Data0#data{buffer = <<SoFar/binary, PortData/binary>>}),
 			{keep_state, Data1, Actions};
 		[Tail, Rest] ->
-			Event = noble_event:decode(<<SoFar/binary, Tail/binary>>),
-			ok = noble_event:validate(Event),
-			{ok, Data1} = maybe_pong(Event, Data0#data{buffer = <<>>}),
-			{ok, Data2} = send_to_owner({noble_port_data, self(), Event}, Data1),
-			case Event of
-				#{<<"type">> := <<"stop">>} ->
-					{next_state, closed, Data2};
-				_ ->
-					handle_event(info, {Port, {data, Rest}}, State, Data2)
+			try noble_event:decode(<<SoFar/binary, Tail/binary>>) of
+				Event = #{<<"type">> := _} ->
+					case noble_event:validate(Event) of
+						ok ->
+							{ok, Data1} = maybe_pong(Event, Data0#data{buffer = <<>>}),
+							{ok, Data2} = send_to_owner({noble_port_data, self(), Event}, Data1),
+							case Event of
+								#{<<"type">> := <<"stop">>} ->
+									{next_state, closed, Data2};
+								_ ->
+									handle_event(info, {Port, {data, Rest}}, State, Data2)
+							end;
+						{error, Reason} ->
+							{ok, Data1} = send_to_owner({noble_port_error, self(), {validation_error, Event, Reason}}, Data0#data{buffer = <<>>}),
+							{next_state, closed, Data1}
+					end
+			catch
+				error:_Reason=#{'__struct__' := 'Elixir.Jason.DecodeError'} ->
+					{ok, Data1} = send_to_owner({noble_port_error, self(), {decode_error, <<SoFar/binary, PortData/binary>>}}, Data0#data{buffer = <<>>}),
+					{next_state, closed, Data1};
+				Class:Reason ->
+					{ok, Data1} = send_to_owner({noble_port_error, self(), {Class, Reason}}, Data0#data{buffer = <<>>}),
+					{next_state, closed, Data1}
 			end
 	end;
 handle_event(info, {'DOWN', Monitor, process, Owner, _Reason}, State, Data=#data{monitor=Monitor, owner=Owner}) when is_reference(Monitor) andalso is_pid(Owner) ->

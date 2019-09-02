@@ -31,8 +31,8 @@ try_load_command() ->
 		{ok, Content} ->
 			JSON = 'Elixir.Jason':'decode!'(Content),
 			case 'Elixir.JsonXema':'new'(JSON) of
-				#{schema := #{definitions := #{<<"Command">> := Schema}}} ->
-					{ok, Schema}
+				#{schema := #{definitions := Definitions = #{<<"Command">> := _}}} ->
+					{ok, Definitions}
 			end
 	end.
 
@@ -41,8 +41,8 @@ try_load_event() ->
 		{ok, Content} ->
 			JSON = 'Elixir.Jason':'decode!'(Content),
 			case 'Elixir.JsonXema':'new'(JSON) of
-				#{schema := #{definitions := #{<<"Event">> := Schema}}} ->
-					{ok, Schema}
+				#{schema := #{definitions := Definitions = #{<<"Event">> := _}}} ->
+					{ok, Definitions}
 			end
 	end.
 

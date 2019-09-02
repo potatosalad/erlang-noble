@@ -13,6 +13,7 @@
 %% Public API
 -export([decode/1]).
 -export([encode/1]).
+-export([schema/1]).
 -export([validate/1]).
 %% Command API
 -export([start_scanning/0]).
@@ -37,6 +38,38 @@
 -export([ping/1]).
 -export([stop/0]).
 
+%% Macros
+-define(UC(C),
+	case C of
+		$a -> $A;
+		$b -> $B;
+		$c -> $C;
+		$d -> $D;
+		$e -> $E;
+		$f -> $F;
+		$g -> $G;
+		$h -> $H;
+		$i -> $I;
+		$j -> $J;
+		$k -> $K;
+		$l -> $L;
+		$m -> $M;
+		$n -> $N;
+		$o -> $O;
+		$p -> $P;
+		$q -> $Q;
+		$r -> $R;
+		$s -> $S;
+		$t -> $T;
+		$u -> $U;
+		$v -> $V;
+		$w -> $W;
+		$x -> $X;
+		$y -> $Y;
+		$z -> $Z;
+		_ -> C
+	end).
+
 %%%===================================================================
 %%% Public API
 %%%===================================================================
@@ -47,9 +80,34 @@ decode(Input) when is_binary(Input) ->
 encode(Command = #{<<"action">> := _}) ->
 	'Elixir.Jason':'encode!'(maybe_encode_command(Command)).
 
+schema(#{<<"action">> := Action}) ->
+	schema(Action);
+schema(<< C, Rest/binary >>) ->
+	Action = << (?UC(C)), Rest/binary >>,
+	Definitions = ets:lookup_element(noble_schema, command, 2),
+	maps:find(Action, Definitions);
+schema(_) ->
+	error.
+
 validate(Command = #{<<"action">> := _}) ->
-	Schema = ets:lookup_element(noble_schema, command, 2),
-	'Elixir.JsonXema':'validate'(Schema, Command).
+	{ok, CommandSchema} = schema(<<"Command">>),
+	case 'Elixir.JsonXema':'validate'(CommandSchema, Command) of
+		ok ->
+			ok;
+		EventSchemaError ->
+			%% Try to validate against a more specific version of the command schema.
+			case schema(Command) of
+				{ok, ActionSchema} ->
+					case 'Elixir.JsonXema':'validate'(ActionSchema, Command) of
+						ok ->
+							EventSchemaError;
+						ActionSchemaError ->
+							ActionSchemaError
+					end;
+				error ->
+					EventSchemaError
+			end
+	end.
 
 %%%===================================================================
 %%% Command API

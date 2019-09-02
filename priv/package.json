@@ -5,6 +5,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "noble-ipc": "^1.1.0"
+    "noble-ipc": "^1.1.1"
   }
 }

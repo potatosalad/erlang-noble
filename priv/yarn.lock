@@ -361,10 +361,10 @@ needle@^2.2.1:
     iconv-lite "^0.4.4"
     sax "^1.2.4"
 
-noble-ipc@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/noble-ipc/-/noble-ipc-1.1.0.tgz#248ecaaafb7c8b0383c7b855cb939dbee31b50fd"
-  integrity sha512-oKH/ZBMgMmRhRTobNqOzxmzj+v8e1sLLbDD6LS3fRhQGOKL3hm51IqvYApe4DuW9yJlIlc9KWffLuCj9wKfkaA==
+noble-ipc@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/noble-ipc/-/noble-ipc-1.1.1.tgz#6db08e2d4ce435bd66d8142fc7c5332d4ccdc6e8"
+  integrity sha512-cEtUA8l+lAwA7DOeVHFcQUqUpRVFuT8w7SL6o1uhcBg78xmhiT7xxIjcPeHifilUQJqn1cWUlrwXfgpNANDrLA==
   dependencies:
     "@abandonware/noble" "^1.9.2-3"
     "@types/node" "^12.7.3"
