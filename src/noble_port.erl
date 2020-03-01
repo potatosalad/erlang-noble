@@ -62,12 +62,12 @@ close(Port) ->
 				ok ->
 					receive
 						{noble_port_closed, Port} ->
-							catch gen_statem:call(Port, close, 5000),
+							catch gen_statem:call(Port, {self(), close}, 5000),
 							self() ! {noble_port_closed, Port},
 							ok
 					after
 						0 ->
-							catch gen_statem:call(Port, close, 5000),
+							catch gen_statem:call(Port, {self(), close}, 5000),
 							ok
 					end;
 				ControlError ->
