@@ -10,7 +10,7 @@ by adding `noble` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps() do
   [
-    {:noble, "~> 0.0.3"}
+    {:noble, "~> 0.0.4"}
   ]
 end
 ```

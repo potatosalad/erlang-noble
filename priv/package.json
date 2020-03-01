@@ -1,10 +1,10 @@
 {
   "name": "erlang-noble",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "noble-ipc": "^1.1.1"
+    "noble-ipc": "^1.2.0"
   }
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4 (2020-03-01)
+
+* Bump upstream version of [noble-ipc](https://github.com/potatosalad/noble-ipc)
+
 ## 0.0.3 (2020-02-29)
 
 * Bump dependencies.
